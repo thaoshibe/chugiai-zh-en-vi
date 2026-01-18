@@ -608,27 +608,50 @@ function initThemeToggle() {
 
 // Font size functionality
 function initFontSize() {
-    const fontSizeSelect = document.getElementById('font-size');
+    const fontIncreaseBtn = document.getElementById('font-increase');
+    const fontDecreaseBtn = document.getElementById('font-decrease');
     const outputArea = document.getElementById('annotated-output');
+    
+    const fontSizes = ['small', 'medium', 'large', 'xlarge'];
+    let currentFontSizeIndex = 1; // default to 'medium'
     
     // Check for saved font size preference or default to 'medium'
     const savedFontSize = localStorage.getItem('fontSize') || 'medium';
-    fontSizeSelect.value = savedFontSize;
+    currentFontSizeIndex = fontSizes.indexOf(savedFontSize);
+    if (currentFontSizeIndex === -1) currentFontSizeIndex = 1;
     
     // Apply the saved font size on load
     outputArea.className = outputArea.className.replace(/font-\w+/g, '').trim();
-    outputArea.classList.add(`font-${savedFontSize}`);
+    outputArea.classList.add(`font-${fontSizes[currentFontSizeIndex]}`);
     
-    // Change font size on select change
-    fontSizeSelect.addEventListener('change', (e) => {
-        const fontSize = e.target.value;
-        
-        // Remove all font size classes and add the new one
-        outputArea.className = outputArea.className.replace(/font-\w+/g, '').trim();
-        outputArea.classList.add(`font-${fontSize}`);
-        
-        // Save preference
-        localStorage.setItem('fontSize', fontSize);
+    // Increase font size
+    fontIncreaseBtn.addEventListener('click', () => {
+        if (currentFontSizeIndex < fontSizes.length - 1) {
+            currentFontSizeIndex++;
+            const fontSize = fontSizes[currentFontSizeIndex];
+            
+            // Remove all font size classes and add the new one
+            outputArea.className = outputArea.className.replace(/font-\w+/g, '').trim();
+            outputArea.classList.add(`font-${fontSize}`);
+            
+            // Save preference
+            localStorage.setItem('fontSize', fontSize);
+        }
+    });
+    
+    // Decrease font size
+    fontDecreaseBtn.addEventListener('click', () => {
+        if (currentFontSizeIndex > 0) {
+            currentFontSizeIndex--;
+            const fontSize = fontSizes[currentFontSizeIndex];
+            
+            // Remove all font size classes and add the new one
+            outputArea.className = outputArea.className.replace(/font-\w+/g, '').trim();
+            outputArea.classList.add(`font-${fontSize}`);
+            
+            // Save preference
+            localStorage.setItem('fontSize', fontSize);
+        }
     });
 }
 
@@ -647,7 +670,7 @@ function initResizableDivider() {
     // Load saved width from localStorage
     const savedWidth = localStorage.getItem('notesWidth');
     if (savedWidth) {
-        resultsContainer.style.gridTemplateColumns = `1fr 4px ${savedWidth}px`;
+        resultsContainer.style.gridTemplateColumns = `1fr 1px ${savedWidth}px`;
     }
     
     resizeHandle.addEventListener('mousedown', (e) => {
@@ -667,7 +690,7 @@ function initResizableDivider() {
         const deltaX = startX - e.clientX;
         const newWidth = Math.max(200, Math.min(600, startWidth + deltaX));
         
-        resultsContainer.style.gridTemplateColumns = `1fr 4px ${newWidth}px`;
+        resultsContainer.style.gridTemplateColumns = `1fr 1px ${newWidth}px`;
     });
     
     document.addEventListener('mouseup', () => {

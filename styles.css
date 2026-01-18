@@ -152,36 +152,47 @@ header h1 {
 .controls-panel {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-    padding: 20px 32px;
+    gap: 8px;
+    padding: 8px 32px;
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .control-section h3 {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
+.control-section-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.compact-control h3 {
+    font-size: 0.65rem;
+    margin-bottom: 3px;
+}
+
 .radio-group, .checkbox-group {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0px;
 }
 
 .radio-group label, .checkbox-group label {
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 6px 8px;
+    padding: 2px 8px;
     border-radius: 4px;
     transition: background 0.2s;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
 }
 
@@ -199,10 +210,10 @@ input[type="radio"], input[type="checkbox"] {
 
 select {
     width: 100%;
-    padding: 8px 12px;
+    padding: 4px 8px;
     border: 1px solid var(--border-color);
-    border-radius: 6px;
-    font-size: 0.875rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
     font-family: inherit;
     background: var(--bg-primary);
     color: var(--text-primary);
@@ -230,7 +241,7 @@ select:focus {
 
 .results-container {
     display: grid;
-    grid-template-columns: 1fr 4px 320px;
+    grid-template-columns: 1fr 1px 320px;
     gap: 0;
     margin-bottom: 32px;
     position: relative;
@@ -247,7 +258,7 @@ select:focus {
 }
 
 .resize-handle {
-    width: 4px;
+    width: 1px;
     background: var(--border-color);
     cursor: col-resize;
     position: relative;
@@ -286,6 +297,46 @@ select:focus {
     font-weight: 600;
 }
 
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.section-header h3 {
+    margin-bottom: 0;
+}
+
+.font-size-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.font-btn {
+    padding: 4px 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.font-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+.font-btn:active {
+    transform: translateY(0);
+}
+
 #chinese-input {
     width: 100%;
     min-height: 140px;
@@ -312,8 +363,8 @@ select:focus {
 
 .primary-button {
     margin-top: 12px;
-    padding: 10px 24px;
-    background: var(--accent-color);
+    padding: 8px 20px;
+    background: #71717a;
     color: white;
     border: none;
     border-radius: 6px;
@@ -325,9 +376,9 @@ select:focus {
 }
 
 .primary-button:hover {
-    background: var(--accent-hover);
+    background: #52525b;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(92, 124, 250, 0.3);
+    box-shadow: 0 4px 12px rgba(82, 82, 91, 0.3);
 }
 
 .primary-button:active {
@@ -710,6 +761,25 @@ a:hover {
     text-decoration: underline;
 }
 
+.footer {
+    padding: 16px 32px;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.footer p {
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.footer a {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
 @media (max-width: 768px) {
     header {
         flex-direction: column;
@@ -772,7 +842,7 @@ a:hover {
         background: white;
     }
 
-    .controls-panel, .input-section, .info-section, .theme-toggle, .primary-button {
+    .controls-panel, .input-section, .info-section, .footer, .theme-toggle, .primary-button {
         display: none;
     }
     

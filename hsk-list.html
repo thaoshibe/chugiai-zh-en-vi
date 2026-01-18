@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK Word List | Chú giải Trung-Anh-Việt</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hsk-container {
+            padding: 32px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+        
+        .back-link:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            transform: translateY(-1px);
+        }
+        
+        .hsk-controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .hsk-controls label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .hsk-controls select {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        
+        .hsk-controls input[type="text"],
+        .hsk-controls input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-width: 200px;
+        }
+        
+        .hsk-controls input[type="number"] {
+            min-width: auto;
+        }
+        
+        .random-practice-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .random-practice-controls label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .random-practice-controls input[type="number"] {
+            width: 80px;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .random-practice-controls select {
+            width: auto;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        
+        .random-practice-controls button {
+            margin: 0;
+        }
+        
+        .stats-panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .hsk-section {
+            margin-bottom: 32px;
+        }
+        
+        .hsk-level-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s;
+        }
+        
+        .hsk-level-header:hover {
+            transform: translateX(4px);
+        }
+        
+        .hsk-level-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .hsk-level-count {
+            margin-left: auto;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .collapse-icon {
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .collapse-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+        
+        .hsk-words {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+        
+        .hsk-words.collapsed {
+            display: none;
+        }
+        
+        .hsk-word-card {
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-color);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .hsk-word-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        
+        .word-header {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .word-chinese {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: 'KaiTi', 'STKaiti', 'BiauKai', 'DFKai-SB', 'Kaiti SC', 'Microsoft YaHei', 'SimHei', Arial, sans-serif;
+        }
+        
+        .word-pinyin {
+            font-size: 0.875rem;
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        .word-definitions {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .definition-line {
+            margin-top: 4px;
+        }
+        
+        .def-lang-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            margin-right: 6px;
+            text-transform: uppercase;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-tertiary);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        
+        /* HSK level colors */
+        .hsk-level-1 .hsk-level-header {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        .hsk-level-1 .hsk-word-card {
+            border-left-color: #10b981;
+        }
+        
+        .hsk-level-2 .hsk-level-header {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+        .hsk-level-2 .hsk-word-card {
+            border-left-color: #3b82f6;
+        }
+        
+        .hsk-level-3 .hsk-level-header {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+        .hsk-level-3 .hsk-word-card {
+            border-left-color: #8b5cf6;
+        }
+        
+        .hsk-level-4 .hsk-level-header {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .hsk-level-4 .hsk-word-card {
+            border-left-color: #f59e0b;
+        }
+        
+        .hsk-level-5 .hsk-level-header {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        .hsk-level-5 .hsk-word-card {
+            border-left-color: #ef4444;
+        }
+        
+        .hsk-level-6 .hsk-level-header {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+        }
+        .hsk-level-6 .hsk-word-card {
+            border-left-color: #ec4899;
+        }
+        
+        @media (max-width: 768px) {
+            .hsk-container {
+                padding: 16px;
+            }
+            
+            .stats-panel {
+                gap: 16px;
+            }
+            
+            .hsk-words {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>HSK Word List (HSK 2.0/3.0)</h1>
+                <p class="subtitle">Complete vocabulary list organized by HSK level</p>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon">☀️</span>
+                <span class="theme-text">Light</span>
+            </button>
+        </header>
+
+        <div id="loading-indicator" class="loading-indicator" style="display: block;">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p>Loading HSK vocabulary and dictionaries (240,000+ entries)...</p>
+            </div>
+        </div>
+
+        <div class="hsk-container" id="main-content" style="display: none;">
+            <a href="index.html" class="back-link">← Back to Text Annotation Tool</a>
+            
+            <div class="stats-panel" id="stats-panel">
+                <div class="stat-item">
+                    <span class="stat-label">Total Words</span>
+                    <span class="stat-value" id="total-words">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Displayed</span>
+                    <span class="stat-value" id="displayed-words">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">HSK 1</span>
+                    <span class="stat-value" id="hsk1-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">HSK 2</span>
+                    <span class="stat-value" id="hsk2-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">HSK 3</span>
+                    <span class="stat-value" id="hsk3-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">HSK 4</span>
+                    <span class="stat-value" id="hsk4-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">HSK 5</span>
+                    <span class="stat-value" id="hsk5-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">HSK 6</span>
+                    <span class="stat-value" id="hsk6-count">0</span>
+                </div>
+            </div>
+
+            <div class="hsk-controls">
+                <label for="translation-select">Show Translations:</label>
+                <select id="translation-select">
+                    <option value="both">English + Vietnamese</option>
+                    <option value="english">English only</option>
+                    <option value="vietnamese">Vietnamese only</option>
+                    <option value="none">None</option>
+                </select>
+
+                <label for="search-input">Search:</label>
+                <input type="text" id="search-input" placeholder="Search by Chinese, pinyin, or meaning...">
+            </div>
+
+            <div class="random-practice-controls">
+                <label for="random-count">Random Practice:</label>
+                <input type="number" id="random-count" min="1" max="100" value="10">
+                <label for="random-count">words</label>
+                
+                <label for="random-level">from</label>
+                <select id="random-level">
+                    <option value="all">All Levels</option>
+                    <option value="1">HSK 1</option>
+                    <option value="2">HSK 2</option>
+                    <option value="3">HSK 3</option>
+                    <option value="4">HSK 4</option>
+                    <option value="5">HSK 5</option>
+                    <option value="6">HSK 6</option>
+                </select>
+                
+                <button id="randomize-btn" class="primary-button">
+                    🎲 Randomize
+                </button>
+                
+                <button id="show-all-btn" class="primary-button" style="background: var(--bg-tertiary); color: var(--text-primary);">
+                    📋 Show All
+                </button>
+            </div>
+
+            <div id="hsk-list"></div>
+        </div>
+
+        <div class="info-section">
+            <h3>About HSK Levels</h3>
+            <p>The HSK (Hanyu Shuiping Kaoshi / 汉语水平考试) is China's standardized test of Chinese language proficiency for non-native speakers. This list includes vocabulary from both <strong>HSK 2.0</strong> (6 levels) and <strong>HSK 3.0</strong> (new system, 9 levels - showing levels 1-6).</p>
+            <ul>
+                <li><strong>HSK 1:</strong> 150 words - Basic level</li>
+                <li><strong>HSK 2:</strong> 300 words - Elementary level</li>
+                <li><strong>HSK 3:</strong> 600 words - Intermediate level</li>
+                <li><strong>HSK 4:</strong> 1,200 words - Upper intermediate</li>
+                <li><strong>HSK 5:</strong> 2,500 words - Advanced level</li>
+                <li><strong>HSK 6:</strong> 5,000+ words - Mastery level</li>
+            </ul>
+            <p class="note"><strong>Data Sources:</strong></p>
+            <p class="note">• <strong>HSK Data:</strong> <a href="https://github.com/drkameleon/complete-hsk-vocabulary" target="_blank">complete-hsk-vocabulary</a> (MIT License)</p>
+            <p class="note">• <strong>Dictionaries:</strong> <a href="https://www.mdbg.net/chinese/dictionary?page=cedict" target="_blank">CC-CEDICT</a> (120,000+ entries) and <a href="https://github.com/ph0ngp/CVDICT" target="_blank">CVDICT</a> (122,000+ entries) - Both under CC BY-SA 4.0 License</p>
+        </div>
+
+        <footer class="footer">
+            <p>Created by <a href="https://thaoshibe.github.io/" target="_blank">Thao Nguyen</a> @ 2026</p>
+        </footer>
+    </div>
+
+    <script src="hsk-list.js"></script>
+</body>
+</html>
+

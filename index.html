@@ -12,7 +12,7 @@
         <header>
             <div class="header-content">
                 <h1>Chú giải Trung-Anh-Việt | Chinese Text Annotation</h1>
-                <p class="subtitle">Add pinyin, word spacing, and definitions to Chinese text</p>
+                <p class="subtitle">Add pinyin, word spacing, and definitions to Chinese text · <a href="hsk-list.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">📚 View HSK Word List</a></p>
             </div>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                 <span class="theme-icon">☀️</span>
@@ -26,11 +26,11 @@
                 <div class="radio-group">
                     <label>
                         <input type="radio" name="show-chinese" value="both" checked>
-                        Pronunciation + Characters
+                        Pinyin + Characters
                     </label>
                     <label>
                         <input type="radio" name="show-chinese" value="pronunciation">
-                        Pronunciation only
+                        Pinyin only
                     </label>
                     <label>
                         <input type="radio" name="show-chinese" value="characters">
@@ -71,39 +71,30 @@
                 </div>
             </div>
 
-            <div class="control-section">
-                <h3>Add Vocabulary</h3>
-                <select id="hsk-level">
-                    <option value="all">For all words</option>
-                    <option value="hsk1">HSK 1 and up</option>
-                    <option value="hsk2">HSK 2 and up</option>
-                    <option value="hsk3" selected>HSK 3 and up</option>
-                    <option value="hsk4">HSK 4 and up</option>
-                    <option value="hsk5">HSK 5 and up</option>
-                    <option value="hsk6">HSK 6 and up</option>
-                    <option value="not-hsk">Not in HSK</option>
-                    <option value="none">None at all</option>
-                </select>
-            </div>
-
-            <div class="control-section">
-                <h3>Sort By</h3>
-                <select id="sort-by">
-                    <option value="appearance">First appearance</option>
-                    <option value="pronunciation">Pronunciation</option>
-                    <option value="radical">Radical</option>
-                    <option value="frequency">Frequency</option>
-                </select>
-            </div>
-
-            <div class="control-section">
-                <h3>Font Size</h3>
-                <select id="font-size">
-                    <option value="small">Small</option>
-                    <option value="medium" selected>Medium</option>
-                    <option value="large">Large</option>
-                    <option value="xlarge">Extra Large</option>
-                </select>
+            <div class="control-section control-section-compact">
+                <div class="compact-control">
+                    <h3>Add Vocabulary</h3>
+                    <select id="hsk-level">
+                        <option value="all">For all words</option>
+                        <option value="hsk1">HSK 1 and up</option>
+                        <option value="hsk2">HSK 2 and up</option>
+                        <option value="hsk3" selected>HSK 3 and up</option>
+                        <option value="hsk4">HSK 4 and up</option>
+                        <option value="hsk5">HSK 5 and up</option>
+                        <option value="hsk6">HSK 6 and up</option>
+                        <option value="not-hsk">Not in HSK</option>
+                        <option value="none">None at all</option>
+                    </select>
+                </div>
+                
+                <div class="compact-control">
+                    <h3>Sort By</h3>
+                    <select id="sort-by">
+                        <option value="appearance">First appearance</option>
+                        <option value="pronunciation">Pronunciation</option>
+                        <option value="frequency">Frequency</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -123,7 +114,13 @@
 
             <div class="results-container" id="results-container">
                 <div class="output-section">
-                    <h3>Annotated Text</h3>
+                    <div class="section-header">
+                        <h3>Annotated Text</h3>
+                        <div class="font-size-controls">
+                            <button id="font-decrease" class="font-btn" title="Decrease font size">A−</button>
+                            <button id="font-increase" class="font-btn" title="Increase font size">A+</button>
+                        </div>
+                    </div>
                     <div id="annotated-output" class="output-area">
                         <p class="placeholder-text">Your annotated text will appear here...</p>
                     </div>
@@ -150,7 +147,7 @@
 
         <div class="info-section">
             <h3>About This Tool</h3>
-            <p>This Chinese text annotation tool uses the <strong>CC-CEDICT dictionary with 120,000+ entries</strong>, <strong>CVDICT Chinese-Vietnamese dictionary with 122,000+ entries</strong>, and <strong>real HSK 2.0/3.0 vocabulary data</strong> to help you learn Chinese by:</p>
+            <p>This Chinese text annotation tool uses the <strong><a href="https://www.mdbg.net/chinese/dictionary?page=cedict" target="_blank">CC-CEDICT</a> dictionary with 120,000+ entries</strong>, <strong>CVDICT Chinese-Vietnamese dictionary with 122,000+ entries</strong>, and <strong>real HSK 2.0/3.0 vocabulary data</strong> to help you learn Chinese by:</p>
             <ul>
                 <li>Adding spaces between words for easier reading</li>
                 <li>Displaying inline Pinyin or other phonetic systems above characters</li>
@@ -159,9 +156,13 @@
                 <li>Advanced word segmentation for accurate word boundaries</li>
             </ul>
             <!-- <p class="note"><strong>Tip:</strong> Hover over annotated words to see their definitions. Press Ctrl/Cmd + Enter to annotate text quickly.</p> -->
-            <p class="note"><strong>Dictionaries:</strong> CC-CEDICT by MDBG (CC License) and <a href="https://github.com/ph0ngp/CVDICT" target="_blank">CVDICT</a> by Phong Phan (CC BY-SA 4.0 License)</p>
+            <p class="note"><strong>Dictionaries:</strong> <a href="https://www.mdbg.net/chinese/dictionary?page=cedict" target="_blank">CC-CEDICT</a> by MDBG (CC BY-SA 4.0 License) and <a href="https://github.com/ph0ngp/CVDICT" target="_blank">CVDICT</a> by Phong Phan (CC BY-SA 4.0 License)</p>
             <p class="note"><strong>HSK Data:</strong> Real HSK 2.0/3.0 vocabulary lists from <a href="https://github.com/drkameleon/complete-hsk-vocabulary" target="_blank">complete-hsk-vocabulary</a> (MIT License)</p>
         </div>
+
+        <footer class="footer">
+            <p>Created by <a href="https://thaoshibe.github.io/" target="_blank">Thao Nguyen</a> @ 2026</p>
+        </footer>
     </div>
 
     <script src="script.js"></script>

@@ -11,88 +11,94 @@
     <div class="container">
         <header>
             <div class="header-content">
-                <h1>Chú giải Trung-Anh-Việt | Chinese Text Annotation</h1>
-                <p class="subtitle">Add pinyin, word spacing, and definitions to Chinese text · <a href="hsk-list.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">📚 View HSK Word List</a></p>
+                <h1 data-i18n="title">🇨🇳 Chinese Text Annotation</h1>
+                <p class="subtitle"><span data-i18n="subtitle">Add pinyin, word spacing, and definitions to Chinese text ✨</span> · <a href="hsk-list.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;"><span data-i18n="viewHskLink">📚 View HSK Word List</span></a></p>
             </div>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                <span class="theme-icon">☀️</span>
-                <span class="theme-text">Light</span>
-            </button>
+            <div class="header-controls">
+                <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
+                    <span class="lang-icon">🌐</span>
+                    <span class="lang-text">EN</span>
+                </button>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon">☀️</span>
+                    <span class="theme-text">Light</span>
+                </button>
+            </div>
         </header>
 
         <div class="controls-panel">
             <div class="control-section">
-                <h3>Show Chinese</h3>
+                <h3 data-i18n="showChineseTitle">Show Chinese</h3>
                 <div class="radio-group">
                     <label>
                         <input type="radio" name="show-chinese" value="both" checked>
-                        Pinyin + Characters
+                        <span data-i18n="pinyinAndChars">Pinyin + Characters</span>
                     </label>
                     <label>
                         <input type="radio" name="show-chinese" value="pronunciation">
-                        Pinyin only
+                        <span data-i18n="pinyinOnly">Pinyin only</span>
                     </label>
                     <label>
                         <input type="radio" name="show-chinese" value="characters">
-                        Characters only
+                        <span data-i18n="charsOnly">Characters only</span>
                     </label>
                 </div>
             </div>
 
             <div class="control-section">
-                <h3>Translation Language</h3>
+                <h3 data-i18n="translationLangTitle">Translation Language</h3>
                 <div class="radio-group">
                     <label>
                         <input type="radio" name="translation-lang" value="both" checked>
-                        English + Vietnamese
+                        <span data-i18n="englishAndVietnamese">English + Vietnamese</span>
                     </label>
                     <label>
                         <input type="radio" name="translation-lang" value="english">
-                        English only
+                        <span data-i18n="englishOnly">English only</span>
                     </label>
                     <label>
                         <input type="radio" name="translation-lang" value="vietnamese">
-                        Vietnamese only
+                        <span data-i18n="vietnameseOnly">Vietnamese only</span>
                     </label>
                 </div>
             </div>
 
             <div class="control-section">
-                <h3>Options</h3>
+                <h3 data-i18n="optionsTitle">Options</h3>
                 <div class="checkbox-group">
                     <label>
                         <input type="checkbox" id="add-spaces">
-                        Add spaces between words
+                        <span data-i18n="addSpaces">Add spaces between words</span>
                     </label>
                     <label>
                         <input type="checkbox" id="for-printing">
-                        For printing
+                        <span data-i18n="forPrinting">For printing</span>
                     </label>
                 </div>
             </div>
 
             <div class="control-section control-section-compact">
                 <div class="compact-control">
-                    <h3>Add Vocabulary</h3>
+                    <h3 data-i18n="addVocabularyTitle">Add Vocabulary</h3>
                     <select id="hsk-level">
-                        <option value="all">For all words</option>
-                        <option value="hsk1">HSK 1 and up</option>
-                        <option value="hsk2">HSK 2 and up</option>
-                        <option value="hsk3" selected>HSK 3 and up</option>
-                        <option value="hsk4">HSK 4 and up</option>
-                        <option value="hsk5">HSK 5 and up</option>
-                        <option value="hsk6">HSK 6 and up</option>
-                        <option value="not-hsk">Not in HSK</option>
-                        <option value="none">None at all</option>
+                        <option value="all" data-i18n="forAllWords">For all words</option>
+                        <option value="hsk1" data-i18n="hsk1AndUp">HSK 1 and up</option>
+                        <option value="hsk2" data-i18n="hsk2AndUp">HSK 2 and up</option>
+                        <option value="hsk3" selected data-i18n="hsk3AndUp">HSK 3 and up</option>
+                        <option value="hsk4" data-i18n="hsk4AndUp">HSK 4 and up</option>
+                        <option value="hsk5" data-i18n="hsk5AndUp">HSK 5 and up</option>
+                        <option value="hsk6" data-i18n="hsk6AndUp">HSK 6 and up</option>
+                        <option value="not-hsk" data-i18n="notInHsk">Not in HSK</option>
+                        <option value="none" data-i18n="noneAtAll">None at all</option>
                     </select>
                 </div>
                 
                 <div class="compact-control">
-                    <h3>Sort By</h3>
+                    <h3 data-i18n="sortByTitle">Sort By</h3>
                     <select id="sort-by">
-                        <option value="appearance">First appearance</option>
-                        <option value="pronunciation">Pronunciation</option>
-                        <option value="frequency">Frequency</option>
+                        <option value="appearance" data-i18n="firstAppearance">First appearance</option>
+                        <option value="pronunciation" data-i18n="pronunciation">Pronunciation</option>
+                        <option value="frequency" data-i18n="frequency">Frequency</option>
                     </select>
                 </div>
             </div>
@@ -101,28 +107,31 @@
         <div id="loading-indicator" class="loading-indicator" style="display: none;">
             <div class="loading-content">
                 <div class="spinner"></div>
-                <p>Loading English & Vietnamese dictionaries (240,000+ entries) and HSK data...</p>
+                <p data-i18n="loadingMessage">⏳ Loading English & Vietnamese dictionaries (240,000+ entries) and HSK data...</p>
             </div>
         </div>
 
         <div class="main-content">
             <div class="input-section">
-                <h3>Enter Chinese Text</h3>
-                <textarea id="chinese-input" placeholder="在这里输入中文文本...&#10;&#10;Example: 你好世界！学习中文很有趣。今天天气很好。我们一起学习汉语吧！"></textarea>
-                <button id="annotate-btn" class="primary-button">Annotate Text</button>
+                <h3 data-i18n="enterChineseText">Enter Chinese Text</h3>
+                <textarea id="chinese-input" data-i18n-placeholder="inputPlaceholder" placeholder="在这里输入中文文本...&#10;&#10;Example: 你好世界！学习中文很有趣。今天天气很好。我们一起学习汉语吧！"></textarea>
+                <div class="button-group">
+                    <button id="example-btn" class="secondary-button" data-i18n="exampleButton">▶️ Run Example</button>
+                    <button id="annotate-btn" class="primary-button" data-i18n="annotateButton">Annotate Text</button>
+                </div>
             </div>
 
             <div class="results-container" id="results-container">
                 <div class="output-section">
                     <div class="section-header">
-                        <h3>Annotated Text</h3>
+                        <h3 data-i18n="annotatedTextTitle">📄 Annotated Text</h3>
                         <div class="font-size-controls">
-                            <button id="font-decrease" class="font-btn" title="Decrease font size">A−</button>
-                            <button id="font-increase" class="font-btn" title="Increase font size">A+</button>
+                            <button id="font-decrease" class="font-btn" data-i18n-title="decreaseFontTitle" title="Decrease font size">A−</button>
+                            <button id="font-increase" class="font-btn" data-i18n-title="increaseFontTitle" title="Increase font size">A+</button>
                         </div>
                     </div>
                     <div id="annotated-output" class="output-area">
-                        <p class="placeholder-text">Your annotated text will appear here...</p>
+                        <p class="placeholder-text" data-i18n="annotatedPlaceholder">✨ Your annotated text will appear here...</p>
                     </div>
                 </div>
 
@@ -130,34 +139,34 @@
 
                 <div class="notes-section" id="notes-section">
                     <div class="notes-header">
-                        <h3>Notes</h3>
-                        <button id="clear-notes-btn" class="clear-notes-btn" title="Clear all notes">Clear All</button>
+                        <h3 data-i18n="notesTitle">📝 Notes</h3>
+                        <button id="clear-notes-btn" class="clear-notes-btn" data-i18n="clearNotesButton" data-i18n-title="clearNotesTitle" title="Clear all notes">🗑️ Clear All</button>
                     </div>
                     <div id="notes-list" class="notes-list">
-                        <p class="placeholder-text">Click on words to add them to your notes...</p>
+                        <p class="placeholder-text" data-i18n="notesPlaceholder">💡 Click on words to add them to your notes...</p>
                     </div>
                 </div>
             </div>
 
             <div class="vocabulary-section" id="vocabulary-section" style="display: none;">
-                <h3>Vocabulary List</h3>
+                <h3 data-i18n="vocabularyListTitle">📚 Vocabulary List</h3>
                 <div id="vocabulary-list" class="vocabulary-list"></div>
             </div>
         </div>
 
         <div class="info-section">
-            <h3>About This Tool</h3>
-            <p>This Chinese text annotation tool uses the <strong><a href="https://www.mdbg.net/chinese/dictionary?page=cedict" target="_blank">CC-CEDICT</a> dictionary with 120,000+ entries</strong>, <strong>CVDICT Chinese-Vietnamese dictionary with 122,000+ entries</strong>, and <strong>real HSK 2.0/3.0 vocabulary data</strong> to help you learn Chinese by:</p>
+            <h3 data-i18n="aboutTitle">ℹ️ About This Tool</h3>
+            <p data-i18n="aboutDescription">This Chinese text annotation tool uses the <strong><a href="https://www.mdbg.net/chinese/dictionary?page=cedict" target="_blank">CC-CEDICT</a> dictionary with 120,000+ entries</strong>, <strong>CVDICT Chinese-Vietnamese dictionary with 122,000+ entries</strong>, and <strong>real HSK 2.0/3.0 vocabulary data</strong> to help you learn Chinese by:</p>
             <ul>
-                <li>Adding spaces between words for easier reading</li>
-                <li>Displaying inline Pinyin or other phonetic systems above characters</li>
-                <li>Showing pop-up definitions in English and/or Vietnamese when you hover over words</li>
-                <li>Generating vocabulary lists filtered by actual HSK level (1-6+)</li>
-                <li>Advanced word segmentation for accurate word boundaries</li>
+                <li data-i18n="feature1">📏 Adding spaces between words for easier reading</li>
+                <li data-i18n="feature2">🔊 Displaying inline Pinyin or other phonetic systems above characters</li>
+                <li data-i18n="feature3">💬 Showing pop-up definitions in English and/or Vietnamese when you hover over words</li>
+                <li data-i18n="feature4">📚 Generating vocabulary lists filtered by actual HSK level (1-6+)</li>
+                <li data-i18n="feature5">✂️ Advanced word segmentation for accurate word boundaries</li>
             </ul>
             <!-- <p class="note"><strong>Tip:</strong> Hover over annotated words to see their definitions. Press Ctrl/Cmd + Enter to annotate text quickly.</p> -->
-            <p class="note"><strong>Dictionaries:</strong> <a href="https://www.mdbg.net/chinese/dictionary?page=cedict" target="_blank">CC-CEDICT</a> by MDBG (CC BY-SA 4.0 License) and <a href="https://github.com/ph0ngp/CVDICT" target="_blank">CVDICT</a> by Phong Phan (CC BY-SA 4.0 License)</p>
-            <p class="note"><strong>HSK Data:</strong> Real HSK 2.0/3.0 vocabulary lists from <a href="https://github.com/drkameleon/complete-hsk-vocabulary" target="_blank">complete-hsk-vocabulary</a> (MIT License)</p>
+            <p class="note" data-i18n="dictionariesNote"><strong>📖 Dictionaries:</strong> <a href="https://www.mdbg.net/chinese/dictionary?page=cedict" target="_blank">CC-CEDICT</a> by MDBG (CC BY-SA 4.0 License) and <a href="https://github.com/ph0ngp/CVDICT" target="_blank">CVDICT</a> by Phong Phan (CC BY-SA 4.0 License)</p>
+            <p class="note" data-i18n="hskDataNote"><strong>📊 HSK Data:</strong> Real HSK 2.0/3.0 vocabulary lists from <a href="https://github.com/drkameleon/complete-hsk-vocabulary" target="_blank">complete-hsk-vocabulary</a> (MIT License)</p>
         </div>
 
         <footer class="footer">

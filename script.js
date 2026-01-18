@@ -1,6 +1,118 @@
 // Chinese Text Annotation Tool - Using CC-CEDICT Dictionary and CVDICT
 // Dictionaries will be loaded dynamically
 
+// Translations for UI elements
+const translations = {
+    en: {
+        title: "🇨🇳 Chinese Text Annotation",
+        subtitle: "Add pinyin, word spacing, and definitions to Chinese text ✨",
+        viewHskLink: "📚 View HSK Word List",
+        showChineseTitle: "Show Chinese",
+        pinyinAndChars: "Pinyin + Characters",
+        pinyinOnly: "Pinyin only",
+        charsOnly: "Characters only",
+        translationLangTitle: "Translation Language",
+        englishAndVietnamese: "English + Vietnamese",
+        englishOnly: "English only",
+        vietnameseOnly: "Vietnamese only",
+        optionsTitle: "Options",
+        addSpaces: "Add spaces between words",
+        forPrinting: "For printing",
+        addVocabularyTitle: "Add Vocabulary",
+        forAllWords: "For all words",
+        hsk1AndUp: "HSK 1 and up",
+        hsk2AndUp: "HSK 2 and up",
+        hsk3AndUp: "HSK 3 and up",
+        hsk4AndUp: "HSK 4 and up",
+        hsk5AndUp: "HSK 5 and up",
+        hsk6AndUp: "HSK 6 and up",
+        notInHsk: "Not in HSK",
+        noneAtAll: "None at all",
+        sortByTitle: "Sort By",
+        firstAppearance: "First appearance",
+        pronunciation: "Pronunciation",
+        frequency: "Frequency",
+        loadingMessage: "⏳ Loading English & Vietnamese dictionaries (240,000+ entries) and HSK data...",
+        enterChineseText: "Enter Chinese Text",
+        inputPlaceholder: "在这里输入中文文本... ✨\n\nExample: 你好世界！学习中文很有趣。今天天气很好。我们一起学习汉语吧！",
+        exampleButton: "▶️ Run Example",
+        annotateButton: "🚀 Annotate Text",
+        annotatedTextTitle: "📄 Annotated Text",
+        decreaseFontTitle: "Decrease font size",
+        increaseFontTitle: "Increase font size",
+        annotatedPlaceholder: "✨ Your annotated text will appear here...",
+        notesTitle: "📝 Notes",
+        clearNotesButton: "🗑️ Clear All",
+        clearNotesTitle: "Clear all notes",
+        notesPlaceholder: "💡 Click on words to add them to your notes...",
+        vocabularyListTitle: "📚 Vocabulary List",
+        aboutTitle: "ℹ️ About This Tool",
+        aboutDescription: "This Chinese text annotation tool uses the <strong><a href=\"https://www.mdbg.net/chinese/dictionary?page=cedict\" target=\"_blank\">CC-CEDICT</a> dictionary with 120,000+ entries</strong>, <strong>CVDICT Chinese-Vietnamese dictionary with 122,000+ entries</strong>, and <strong>real HSK 2.0/3.0 vocabulary data</strong> to help you learn Chinese by:",
+        feature1: "📏 Adding spaces between words for easier reading",
+        feature2: "🔊 Displaying inline Pinyin or other phonetic systems above characters",
+        feature3: "💬 Showing pop-up definitions in English and/or Vietnamese when you hover over words",
+        feature4: "📚 Generating vocabulary lists filtered by actual HSK level (1-6+)",
+        feature5: "✂️ Advanced word segmentation for accurate word boundaries",
+        dictionariesNote: "<strong>📖 Dictionaries:</strong> <a href=\"https://www.mdbg.net/chinese/dictionary?page=cedict\" target=\"_blank\">CC-CEDICT</a> by MDBG (CC BY-SA 4.0 License) and <a href=\"https://github.com/ph0ngp/CVDICT\" target=\"_blank\">CVDICT</a> by Phong Phan (CC BY-SA 4.0 License)",
+        hskDataNote: "<strong>📊 HSK Data:</strong> Real HSK 2.0/3.0 vocabulary lists from <a href=\"https://github.com/drkameleon/complete-hsk-vocabulary\" target=\"_blank\">complete-hsk-vocabulary</a> (MIT License)"
+    },
+    vi: {
+        title: "🇨🇳 Công cụ chú thích văn bản tiếng Trung",
+        subtitle: "Thêm phiên âm pinyin, khoảng cách từ và định nghĩa cho văn bản tiếng Trung ✨",
+        viewHskLink: "📚 Xem danh sách từ vựng HSK",
+        showChineseTitle: "Hiển thị tiếng Trung",
+        pinyinAndChars: "Pinyin + Chữ Hán",
+        pinyinOnly: "Chỉ Pinyin",
+        charsOnly: "Chỉ Chữ Hán",
+        translationLangTitle: "Ngôn ngữ dịch",
+        englishAndVietnamese: "Tiếng Anh + Tiếng Việt",
+        englishOnly: "Chỉ tiếng Anh",
+        vietnameseOnly: "Chỉ tiếng Việt",
+        optionsTitle: "Tùy chọn",
+        addSpaces: "Thêm khoảng cách giữa các từ",
+        forPrinting: "Để in",
+        addVocabularyTitle: "Thêm từ vựng",
+        forAllWords: "Cho tất cả các từ",
+        hsk1AndUp: "HSK 1 trở lên",
+        hsk2AndUp: "HSK 2 trở lên",
+        hsk3AndUp: "HSK 3 trở lên",
+        hsk4AndUp: "HSK 4 trở lên",
+        hsk5AndUp: "HSK 5 trở lên",
+        hsk6AndUp: "HSK 6 trở lên",
+        notInHsk: "Không có trong HSK",
+        noneAtAll: "Không có gì cả",
+        sortByTitle: "Sắp xếp theo",
+        firstAppearance: "Xuất hiện đầu tiên",
+        pronunciation: "Phiên âm",
+        frequency: "Tần suất",
+        loadingMessage: "⏳ Đang tải từ điển tiếng Anh & tiếng Việt (240.000+ mục) và dữ liệu HSK...",
+        enterChineseText: "Nhập văn bản tiếng Trung",
+        inputPlaceholder: "在这里输入中文文本... ✨\n\nVí dụ: 你好世界！学习中文很有趣。今天天气很好。我们一起学习汉语吧！",
+        exampleButton: "▶️ Chạy ví dụ",
+        annotateButton: "🚀 Chú thích văn bản",
+        annotatedTextTitle: "📄 Văn bản đã chú thích",
+        decreaseFontTitle: "Giảm cỡ chữ",
+        increaseFontTitle: "Tăng cỡ chữ",
+        annotatedPlaceholder: "✨ Văn bản đã chú thích của bạn sẽ xuất hiện ở đây...",
+        notesTitle: "📝 Ghi chú",
+        clearNotesButton: "🗑️ Xóa tất cả",
+        clearNotesTitle: "Xóa tất cả ghi chú",
+        notesPlaceholder: "💡 Nhấp vào các từ để thêm chúng vào ghi chú của bạn...",
+        vocabularyListTitle: "📚 Danh sách từ vựng",
+        aboutTitle: "ℹ️ Giới thiệu công cụ",
+        aboutDescription: "Công cụ chú thích văn bản tiếng Trung này sử dụng <strong>từ điển <a href=\"https://www.mdbg.net/chinese/dictionary?page=cedict\" target=\"_blank\">CC-CEDICT</a> với hơn 120.000 mục</strong>, <strong>từ điển Trung-Việt CVDICT với hơn 122.000 mục</strong>, và <strong>dữ liệu từ vựng HSK 2.0/3.0 thực tế</strong> để giúp bạn học tiếng Trung bằng cách:",
+        feature1: "📏 Thêm khoảng cách giữa các từ để dễ đọc hơn",
+        feature2: "🔊 Hiển thị phiên âm Pinyin hoặc các hệ thống phiên âm khác phía trên chữ Hán",
+        feature3: "💬 Hiển thị định nghĩa bằng tiếng Anh và/hoặc tiếng Việt khi bạn di chuột qua các từ",
+        feature4: "📚 Tạo danh sách từ vựng được lọc theo cấp độ HSK thực tế (1-6+)",
+        feature5: "✂️ Phân đoạn từ nâng cao để xác định ranh giới từ chính xác",
+        dictionariesNote: "<strong>📖 Từ điển:</strong> <a href=\"https://www.mdbg.net/chinese/dictionary?page=cedict\" target=\"_blank\">CC-CEDICT</a> của MDBG (Giấy phép CC BY-SA 4.0) và <a href=\"https://github.com/ph0ngp/CVDICT\" target=\"_blank\">CVDICT</a> của Phong Phan (Giấy phép CC BY-SA 4.0)",
+        hskDataNote: "<strong>📊 Dữ liệu HSK:</strong> Danh sách từ vựng HSK 2.0/3.0 thực tế từ <a href=\"https://github.com/drkameleon/complete-hsk-vocabulary\" target=\"_blank\">complete-hsk-vocabulary</a> (Giấy phép MIT)"
+    }
+};
+
+let currentLang = 'en';
+
 let fullDictionary = null;
 let charDictionary = null;
 let fullDictionaryVN = null;
@@ -612,45 +724,39 @@ function initFontSize() {
     const fontDecreaseBtn = document.getElementById('font-decrease');
     const outputArea = document.getElementById('annotated-output');
     
+    if (!fontIncreaseBtn || !fontDecreaseBtn || !outputArea) return;
+    
     const fontSizes = ['small', 'medium', 'large', 'xlarge'];
-    let currentFontSizeIndex = 1; // default to 'medium'
     
     // Check for saved font size preference or default to 'medium'
-    const savedFontSize = localStorage.getItem('fontSize') || 'medium';
-    currentFontSizeIndex = fontSizes.indexOf(savedFontSize);
-    if (currentFontSizeIndex === -1) currentFontSizeIndex = 1;
+    let currentSizeIndex = fontSizes.indexOf(localStorage.getItem('fontSize') || 'medium');
+    if (currentSizeIndex === -1) currentSizeIndex = 1; // Default to 'medium' (index 1)
     
     // Apply the saved font size on load
-    outputArea.className = outputArea.className.replace(/font-\w+/g, '').trim();
-    outputArea.classList.add(`font-${fontSizes[currentFontSizeIndex]}`);
+    function applyFontSize() {
+        // Remove all font size classes
+        fontSizes.forEach(size => outputArea.classList.remove(`font-${size}`));
+        // Add the current size class
+        outputArea.classList.add(`font-${fontSizes[currentSizeIndex]}`);
+        // Save preference
+        localStorage.setItem('fontSize', fontSizes[currentSizeIndex]);
+    }
+    
+    applyFontSize();
     
     // Increase font size
     fontIncreaseBtn.addEventListener('click', () => {
-        if (currentFontSizeIndex < fontSizes.length - 1) {
-            currentFontSizeIndex++;
-            const fontSize = fontSizes[currentFontSizeIndex];
-            
-            // Remove all font size classes and add the new one
-            outputArea.className = outputArea.className.replace(/font-\w+/g, '').trim();
-            outputArea.classList.add(`font-${fontSize}`);
-            
-            // Save preference
-            localStorage.setItem('fontSize', fontSize);
+        if (currentSizeIndex < fontSizes.length - 1) {
+            currentSizeIndex++;
+            applyFontSize();
         }
     });
     
     // Decrease font size
     fontDecreaseBtn.addEventListener('click', () => {
-        if (currentFontSizeIndex > 0) {
-            currentFontSizeIndex--;
-            const fontSize = fontSizes[currentFontSizeIndex];
-            
-            // Remove all font size classes and add the new one
-            outputArea.className = outputArea.className.replace(/font-\w+/g, '').trim();
-            outputArea.classList.add(`font-${fontSize}`);
-            
-            // Save preference
-            localStorage.setItem('fontSize', fontSize);
+        if (currentSizeIndex > 0) {
+            currentSizeIndex--;
+            applyFontSize();
         }
     });
 }
@@ -670,7 +776,7 @@ function initResizableDivider() {
     // Load saved width from localStorage
     const savedWidth = localStorage.getItem('notesWidth');
     if (savedWidth) {
-        resultsContainer.style.gridTemplateColumns = `1fr 1px ${savedWidth}px`;
+        resultsContainer.style.gridTemplateColumns = `1fr 4px ${savedWidth}px`;
     }
     
     resizeHandle.addEventListener('mousedown', (e) => {
@@ -690,7 +796,7 @@ function initResizableDivider() {
         const deltaX = startX - e.clientX;
         const newWidth = Math.max(200, Math.min(600, startWidth + deltaX));
         
-        resultsContainer.style.gridTemplateColumns = `1fr 1px ${newWidth}px`;
+        resultsContainer.style.gridTemplateColumns = `1fr 4px ${newWidth}px`;
     });
     
     document.addEventListener('mouseup', () => {
@@ -706,14 +812,97 @@ function initResizableDivider() {
     });
 }
 
+// Language switching functionality
+function updateLanguage(lang) {
+    currentLang = lang;
+    
+    // Update all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            element.innerHTML = translations[lang][key];
+        }
+    });
+    
+    // Update placeholder attributes
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (translations[lang] && translations[lang][key]) {
+            element.placeholder = translations[lang][key];
+        }
+    });
+    
+    // Update title attributes (for tooltips)
+    document.querySelectorAll('[data-i18n-title]').forEach(element => {
+        const key = element.getAttribute('data-i18n-title');
+        if (translations[lang] && translations[lang][key]) {
+            element.title = translations[lang][key];
+        }
+    });
+    
+    // Save language preference
+    localStorage.setItem('language', lang);
+}
+
+function initLanguageToggle() {
+    const langToggle = document.getElementById('lang-toggle');
+    if (!langToggle) return;
+    
+    const langText = langToggle.querySelector('.lang-text');
+    
+    // Check for saved language preference or default to 'en'
+    const savedLang = localStorage.getItem('language') || 'en';
+    currentLang = savedLang;
+    
+    // Apply the saved language on load
+    if (savedLang === 'vi') {
+        langText.textContent = 'VN';
+        updateLanguage('vi');
+    } else {
+        langText.textContent = 'EN';
+        updateLanguage('en');
+    }
+    
+    // Toggle language on button click
+    langToggle.addEventListener('click', () => {
+        if (currentLang === 'en') {
+            currentLang = 'vi';
+            langText.textContent = 'VN';
+            updateLanguage('vi');
+        } else {
+            currentLang = 'en';
+            langText.textContent = 'EN';
+            updateLanguage('en');
+        }
+    });
+}
+
+// Run example functionality
+function runExample() {
+    const inputArea = document.getElementById('chinese-input');
+    const exampleText = "你好世界！学习中文很有趣。今天天气很好。我们一起学习汉语吧！";
+    
+    if (inputArea) {
+        inputArea.value = exampleText;
+        // Automatically trigger annotation
+        annotateText();
+    }
+}
+
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     const annotateBtn = document.getElementById('annotate-btn');
+    const exampleBtn = document.getElementById('example-btn');
     const inputArea = document.getElementById('chinese-input');
     const clearNotesBtn = document.getElementById('clear-notes-btn');
     
     if (annotateBtn) {
         annotateBtn.addEventListener('click', annotateText);
+    }
+    
+    // Example button click handler
+    if (exampleBtn) {
+        exampleBtn.addEventListener('click', runExample);
     }
     
     // Allow Ctrl/Cmd + Enter to annotate
@@ -738,6 +927,9 @@ document.addEventListener('DOMContentLoaded', () => {
             updateNotesDisplay();
         });
     });
+    
+    // Initialize language toggle
+    initLanguageToggle();
     
     // Initialize theme toggle
     initThemeToggle();

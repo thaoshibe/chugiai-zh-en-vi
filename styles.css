@@ -121,7 +121,14 @@ header h1 {
     color: var(--text-secondary);
 }
 
-.theme-toggle {
+.header-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.theme-toggle,
+.lang-toggle {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     color: var(--text-primary);
@@ -136,16 +143,19 @@ header h1 {
     transition: all 0.2s ease;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.lang-toggle:hover {
     background: var(--bg-tertiary);
     transform: translateY(-1px);
 }
 
-.theme-toggle:active {
+.theme-toggle:active,
+.lang-toggle:active {
     transform: translateY(0);
 }
 
-.theme-icon {
+.theme-icon,
+.lang-icon {
     font-size: 1rem;
 }
 
@@ -361,10 +371,15 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(92, 124, 250, 0.1);
 }
 
-.primary-button {
+.button-group {
+    display: flex;
+    gap: 12px;
     margin-top: 12px;
-    padding: 8px 20px;
-    background: #71717a;
+}
+
+.primary-button {
+    padding: 10px 24px;
+    background: var(--accent-color);
     color: white;
     border: none;
     border-radius: 6px;
@@ -376,12 +391,35 @@ select:focus {
 }
 
 .primary-button:hover {
-    background: #52525b;
+    background: var(--accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(82, 82, 91, 0.3);
+    box-shadow: 0 4px 12px rgba(92, 124, 250, 0.3);
 }
 
 .primary-button:active {
+    transform: translateY(0);
+}
+
+.secondary-button {
+    padding: 10px 24px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.secondary-button:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+.secondary-button:active {
     transform: translateY(0);
 }
 
@@ -791,12 +829,21 @@ a:hover {
         width: 100%;
     }
     
-    .theme-toggle {
+    .header-controls {
         align-self: flex-end;
     }
 
     header h1 {
         font-size: 1.125rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .button-group button {
+        width: 100%;
     }
 
     .controls-panel {
@@ -842,7 +889,7 @@ a:hover {
         background: white;
     }
 
-    .controls-panel, .input-section, .info-section, .footer, .theme-toggle, .primary-button {
+    .controls-panel, .input-section, .info-section, .footer, .header-controls, .button-group {
         display: none;
     }
     
@@ -860,4 +907,3 @@ a:hover {
         color: #000;
     }
 }
-

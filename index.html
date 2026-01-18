@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chú giải Trung-Anh-Việt</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Chú giải Trung-Anh-Việt | Chinese Text Annotation</h1>
+                <p class="subtitle">Add pinyin, word spacing, and definitions to Chinese text</p>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon">☀️</span>
+                <span class="theme-text">Light</span>
+            </button>
+        </header>
+
+        <div class="controls-panel">
+            <div class="control-section">
+                <h3>Show Chinese</h3>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="show-chinese" value="both" checked>
+                        Pronunciation + Characters
+                    </label>
+                    <label>
+                        <input type="radio" name="show-chinese" value="pronunciation">
+                        Pronunciation only
+                    </label>
+                    <label>
+                        <input type="radio" name="show-chinese" value="characters">
+                        Characters only
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Translation Language</h3>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="translation-lang" value="both" checked>
+                        English + Vietnamese
+                    </label>
+                    <label>
+                        <input type="radio" name="translation-lang" value="english">
+                        English only
+                    </label>
+                    <label>
+                        <input type="radio" name="translation-lang" value="vietnamese">
+                        Vietnamese only
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Options</h3>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="add-spaces">
+                        Add spaces between words
+                    </label>
+                    <label>
+                        <input type="checkbox" id="for-printing">
+                        For printing
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Add Vocabulary</h3>
+                <select id="hsk-level">
+                    <option value="all">For all words</option>
+                    <option value="hsk1">HSK 1 and up</option>
+                    <option value="hsk2">HSK 2 and up</option>
+                    <option value="hsk3" selected>HSK 3 and up</option>
+                    <option value="hsk4">HSK 4 and up</option>
+                    <option value="hsk5">HSK 5 and up</option>
+                    <option value="hsk6">HSK 6 and up</option>
+                    <option value="not-hsk">Not in HSK</option>
+                    <option value="none">None at all</option>
+                </select>
+            </div>
+
+            <div class="control-section">
+                <h3>Sort By</h3>
+                <select id="sort-by">
+                    <option value="appearance">First appearance</option>
+                    <option value="pronunciation">Pronunciation</option>
+                    <option value="radical">Radical</option>
+                    <option value="frequency">Frequency</option>
+                </select>
+            </div>
+
+            <div class="control-section">
+                <h3>Font Size</h3>
+                <select id="font-size">
+                    <option value="small">Small</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="large">Large</option>
+                    <option value="xlarge">Extra Large</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="loading-indicator" class="loading-indicator" style="display: none;">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p>Loading English & Vietnamese dictionaries (240,000+ entries) and HSK data...</p>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h3>Enter Chinese Text</h3>
+                <textarea id="chinese-input" placeholder="在这里输入中文文本...&#10;&#10;Example: 你好世界！学习中文很有趣。今天天气很好。我们一起学习汉语吧！"></textarea>
+                <button id="annotate-btn" class="primary-button">Annotate Text</button>
+            </div>
+
+            <div class="results-container" id="results-container">
+                <div class="output-section">
+                    <h3>Annotated Text</h3>
+                    <div id="annotated-output" class="output-area">
+                        <p class="placeholder-text">Your annotated text will appear here...</p>
+                    </div>
+                </div>
+
+                <div class="resize-handle" id="resize-handle"></div>
+
+                <div class="notes-section" id="notes-section">
+                    <div class="notes-header">
+                        <h3>Notes</h3>
+                        <button id="clear-notes-btn" class="clear-notes-btn" title="Clear all notes">Clear All</button>
+                    </div>
+                    <div id="notes-list" class="notes-list">
+                        <p class="placeholder-text">Click on words to add them to your notes...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vocabulary-section" id="vocabulary-section" style="display: none;">
+                <h3>Vocabulary List</h3>
+                <div id="vocabulary-list" class="vocabulary-list"></div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>About This Tool</h3>
+            <p>This Chinese text annotation tool uses the <strong>CC-CEDICT dictionary with 120,000+ entries</strong>, <strong>CVDICT Chinese-Vietnamese dictionary with 122,000+ entries</strong>, and <strong>real HSK 2.0/3.0 vocabulary data</strong> to help you learn Chinese by:</p>
+            <ul>
+                <li>Adding spaces between words for easier reading</li>
+                <li>Displaying inline Pinyin or other phonetic systems above characters</li>
+                <li>Showing pop-up definitions in English and/or Vietnamese when you hover over words</li>
+                <li>Generating vocabulary lists filtered by actual HSK level (1-6+)</li>
+                <li>Advanced word segmentation for accurate word boundaries</li>
+            </ul>
+            <!-- <p class="note"><strong>Tip:</strong> Hover over annotated words to see their definitions. Press Ctrl/Cmd + Enter to annotate text quickly.</p> -->
+            <p class="note"><strong>Dictionaries:</strong> CC-CEDICT by MDBG (CC License) and <a href="https://github.com/ph0ngp/CVDICT" target="_blank">CVDICT</a> by Phong Phan (CC BY-SA 4.0 License)</p>
+            <p class="note"><strong>HSK Data:</strong> Real HSK 2.0/3.0 vocabulary lists from <a href="https://github.com/drkameleon/complete-hsk-vocabulary" target="_blank">complete-hsk-vocabulary</a> (MIT License)</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
